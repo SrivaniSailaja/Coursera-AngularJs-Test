@@ -9,14 +9,12 @@
   body{}
   </style>
 </head>
-<body ng-app="calculatorApp">
-  <div ng-controller="firstController">
+<body ng-app="DIApp">
+  <div ng-controller="DIController">
   <div>
-    Your name:<input type="text" ng-model="name" ng-keyup="dispalyNumeric();">
+    Your name:<input type="text" ng-model='name',ng-blur=upper();>
   </div>
-  <div>
-    total numeric value of your name is : {{totalvalue}}
-  </div>
+
 </div>
 </body>
 </html>
