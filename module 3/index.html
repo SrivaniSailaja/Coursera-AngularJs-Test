@@ -10,9 +10,10 @@
   </style>
 </head>
 <body ng-app="DIApp">
-  <div ng-controller="DIController">
+  <h1>Example of Dependency injection</h1>
+  <div ng-controller="DiController">
   <div>
-    Your name:<input type="text" ng-model='name',ng-blur=upper();>
+    Your name:<input type="text" ng-model="name" ng-blur="upper();">
   </div>
 
 </div>
