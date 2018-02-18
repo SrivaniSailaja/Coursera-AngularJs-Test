@@ -43,6 +43,7 @@
             }
             else {
                 $scope.result = "Enjoy!";
+                $scope.changecolor = { 'border-color': 'green' };
             }
 
 
