@@ -9,34 +9,43 @@
     function LunchCheckController($scope, $filter) {
         $scope.names = "";
         $scope.result = "";
-        $scope.message="";
-    }
+        $scope.message = "";
+        $scope.changecolor = { 'background-color': 'white' };
 
-    $scope.CheckFood = function () {
 
-        var namesArr = $scope.names.split(',');
+        $scope.CheckFood = function () {
 
-        if (namesArr > 0) {
+            $scope.message = "";
+            var namesArr = $scope.names.split(',');
 
-            for (var i = 0; i < namesArr.length; i++) {
-                if ((namesArr[i] == ' ') || (namesArr[i] == '')) {
-                    $scope.message = 'We do NOT consider empty item(""||" ") as an item towards to the count';
-                    namesArr.pop(namesArr[i])
+            if (namesArr.length >1 ) {
+
+                for (var i = namesArr.length; i > 0; i--) {
+                    if ((namesArr[i] == ' ') || (namesArr[i] == '')) {
+                        $scope.message = 'We do NOT consider empty item(""||" ") as an item towards to the count';
+                        namesArr.pop(namesArr[i-1])
+                    }
+
                 }
-
-
+                if (namesArr.length <= 3) {
+                    $scope.result = "Enjoy!";
+                    $scope.changecolor = { 'border-color': 'green' }
+                }
+                else {
+                    $scope.result = "Too Much!";
+                    $scope.changecolor = { 'border-color': 'red' };
+                }
             }
-            if (namesArr.length <= 3) {
-                $scope.result = "Enjoy!";
+            else if (namesArr.length == 1 && namesArr[0] == "") {
+                $scope.result = "Please enter data first";
+                $scope.message = "";
+                $scope.changecolor = { 'border-color': 'red' };
             }
             else {
-                $scope.result = "Too Much!";
+                $scope.result = "Enjoy!";
             }
-        }
-        else {
-            $scope.result = "Please enter data first";
-        }
 
-       
+
+        }
     }
 })();
