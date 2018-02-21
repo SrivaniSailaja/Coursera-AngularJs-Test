@@ -3,10 +3,11 @@
     'use strict;'
     angular.module('myFilterDemo', [])
     .controller('myFilterDemoController', myFilterDemoController)
+    .filter("changeName", NameChangeFilter);
 
-    myFilterDemoController.$inject=['$scope','$filter']
+    myFilterDemoController.$inject = ['$scope', '$filter', 'changeNameFilter']
    
-    function myFilterDemoController($scope, $filter) {
+    function myFilterDemoController($scope, $filter, changeNameFilter) {
         $scope.name = "Sailu";
         $scope.stateOfBegin = "sad face";
         $scope.cookieCost = 0.45;
@@ -17,11 +18,27 @@
             return output;
         };
 
+        $scope.sayNewMessage = function () {
+            var msg = "Tommy is hungry.";
+            msg = changeNameFilter(msg);
+            var output = $filter('uppercase')(msg)
+            return output;
+        };
+
         $scope.feedTommy = function () {
             $scope.stateOfBegin = "happy face";
         };
 
 
+    }
+
+    function NameChangeFilter() {
+        return function (input) {
+            input = input || "";
+            input = input.replace("Tommy", "Goffy");
+            return input;
+
+        };
     }
 
     
