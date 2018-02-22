@@ -23,15 +23,19 @@
             $scope.counter++;
         }
 
-        $scope.$watch("onceCounter", function (oldValue, newValue) {
-            console.log("old value :", oldValue);
-            console.log("new value :", newValue);
+        $scope.$watch(function () {
+            console.log("Digest loop fired");
         });
 
-        $scope.$watch("counter", function (oldValue, newValue) {
-            console.log("old value counter :", oldValue);
-            console.log("new value counter :", newValue);
-        });
+        //$scope.$watch("onceCounter", function (oldValue, newValue) {
+        //    console.log("old value :", oldValue);
+        //    console.log("new value :", newValue);
+        //});
+
+        //$scope.$watch("counter", function (oldValue, newValue) {
+        //    console.log("old value counter :", oldValue);
+        //    console.log("new value counter :", newValue);
+        //});
     }
 
 
