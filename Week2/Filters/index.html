@@ -16,6 +16,8 @@
 				<h3>{{name}} has message for you :</h3>
 				<h6>Original:{{sayMessage()}}</h6>
 				<h6>Modified:{{sayNewMessage()}}</h6><!--added custom Filters.-->
+				<h6>Truth:{{sayNewMessage() | truth : 'Goffy' : 'My dog Tommy'}}</h6>
+				<h6>BIG TRUTH :{{sayNewMessage() | truth : 'Goffy' : 'My dog Tommy'| uppercase}} </h6>
 			</center>
 			
 		</div>

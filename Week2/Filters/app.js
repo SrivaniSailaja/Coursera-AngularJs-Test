@@ -3,7 +3,8 @@
     'use strict;'
     angular.module('myFilterDemo', [])
     .controller('myFilterDemoController', myFilterDemoController)
-    .filter("changeName", NameChangeFilter);
+    .filter("changeName", NameChangeFilter)
+    .filter("truth", TruthFilter);
 
     myFilterDemoController.$inject = ['$scope', '$filter', 'changeNameFilter']
    
@@ -21,8 +22,8 @@
         $scope.sayNewMessage = function () {
             var msg = "Tommy is hungry.";
             msg = changeNameFilter(msg);
-            var output = $filter('uppercase')(msg)
-            return output;
+            //var output = $filter('uppercase')(msg)
+            return msg;
         };
 
         $scope.feedTommy = function () {
@@ -38,6 +39,14 @@
             input = input.replace("Tommy", "Goffy");
             return input;
 
+        };
+    }
+
+    function TruthFilter() {
+        return function (input, target, replace) {
+            input = input || "";
+            input = input.replace(target, replace);
+            return input;
         };
     }
 
