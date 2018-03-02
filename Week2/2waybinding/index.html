@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html ng-app="counterApp">
+<head>
+	<title>2Way Binding Example</title>
+	<link rel="stylesheet" href="styles/bootstrap.min.css" />
+	<script src="angular.min.js"></script>
+	<script src="app.js"></script>
+</head>
+<body ng-controller="counterController">
+	<div class="container">
+	
+		<center>
+			<h1>2 Way Binding</h1><br />
+			<button class="btn btn-default" ng-click="showNumebrOfWatchers()"># of Watchers</button>
+			<button class="btn btn-default" ng-click="setFullName()">Set Full Name</button>
+			<h5>Full name is :</h5>{{::fullname}}
+			<button class="btn btn-default" ng-click="logFirstName()">Log First Name</button>
+			<button class="btn btn-default" ng-click="logFullName()">Log Full Name</button>
+			<br /><br />
+			<input type="text" ng-model="firstname"/>
+		</center>
+	</div>
+</body>
+</html>

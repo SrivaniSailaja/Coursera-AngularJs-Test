@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html ng-app="ShoppingListApp">
+<head>
+	<title>Singleton Service</title>
+	<link rel="stylesheet" href="styles/bootstrap.min.css" />
+	<script src="angular.min.js"></script>
+	<script src="app.js"></script>
+</head>
+<body class="container">
+	<div ng-controller="ShoppingListAddController as itemAdder">
+		<center>
+			<h2>Shopping List Application</h2>
+		</center>
+		<input type="text" ng-model="itemAdder.itemName" placeholder="item name" />
+		<input type="text" ng-model="itemAdder.itemQuantity" placeholder="item Quantity" />
+		<button class="btn btn-default" ng-click="itemAdder.addItems();"> Add Items To Shopping List</button>
+	</div>
+	<div ng-controller="ShoppingListShowController as ShowList">
+
+			<ol>
+				<li ng-repeat="item in ShowList.items">
+					{{item.quantity}} of {{item.name}} 
+					<button class="btn btn-default" ng-click="ShowList.removeItem($index)">Remove Item</button>
+				</li>
+			</ol>
+
+	</div>
+</body>
+</html>

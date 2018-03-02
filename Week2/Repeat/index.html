@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html ng-app="repeatApp">
+<head>
+	<title>2Way Binding Example</title>
+	<link rel="stylesheet" href="styles/bootstrap.min.css" />
+	<script src="angular.min.js"></script>
+	<script src="app.js"></script>
+</head>
+<body ng-controller="repeatController">
+	<div class="container">
+	
+		<center>
+			<h2>ng-repeat Demo</h2>
+			<br /><br />
+			<input type="text" ng-model="search" placeholder="Search any item in Shopping List" />
+		</center>
+		<ul>
+			<li ng-repeat="item in shoppingList1|filter:search">{{item}}</li>
+		</ul>
+		<ul>
+			<li ng-repeat="item in shoppingList2">{{item.name}} is {{item.quantity}} in quantity </li>
+		</ul>
+		<ul>
+			<li ng-repeat="item in shoppingList2">{{$index+1}} : {{item.name}} is {{item.quantity}} in quantity </li>
+		</ul>
+		<br />
+		<br />
+		
+		<center>
+			<input type="text" ng-model="addName" placeholder="Enter Name" /> 
+			<input type="text" ng-model="addQuantity" placeholder="Enter Quantity" /><br /><br />
+			<button class="btn btn-default" ng-click="addItems()">Add Item</button>
+		</center>
+	</div>
+</body>
+</html>

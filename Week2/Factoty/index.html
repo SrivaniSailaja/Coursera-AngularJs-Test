@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html ng-app="ShoppingListApp">
+<head>
+	<title>Singleton Service</title>
+	<link rel="stylesheet" href="styles/bootstrap.min.css" />
+	<script src="angular.min.js"></script>
+	<script src="app.js"></script>
+</head>
+<body class="container">
+	<div ng-controller="ShoppingListController1 as list1">
+		<center>
+			<h2>Shopping List 1</h2>
+		</center>
+		<input type="text" ng-model="list1.itemName" placeholder="item name" />
+		<input type="text" ng-model="list1.itemQuantity" placeholder="item Quantity" />
+		<button class="btn btn-default" ng-click="list1.addItems();"> Add Items To Shopping List</button>
+
+		<ol>
+			<li ng-repeat="item in list1.items">
+				{{item.quantity}} of {{item.name}}
+				<button class="btn btn-default" ng-click="list1.removeItem($index)">Remove Item</button>
+			</li>
+		</ol>
+		<div class="error">Error:{{list1.errorMessage}}</div>
+	</div>
+	<div ng-controller="ShoppingListController2 as list2">
+		<center>
+			<h2>Shopping List 2</h2>
+		</center>
+		<input type="text" ng-model="list2.itemName" placeholder="item name" />
+		<input type="text" ng-model="list2.itemQuantity" placeholder="item Quantity" />
+		<button class="btn btn-default" ng-click="list2.addItems();"> Add Items To Shopping List</button>
+
+		<ol>
+			<li ng-repeat="item in list2.items">
+				{{item.quantity}} of {{item.name}}
+				<button class="btn btn-default" ng-click="list2.removeItem($index)">Remove Item</button>
+			</li>
+		</ol>
+		<div class="error">Error:{{list2.errorMessage}}</div>
+			
+
+	</div>
+</body>
+</html>

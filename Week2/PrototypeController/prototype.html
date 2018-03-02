@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html ng-app="prototypeApp">
+<head>
+	<title>Prototype inhertance</title>
+	<link rel="stylesheet" href="styles/bootstrap.min.css" />
+	<script src="angular.min.js"></script>
+	<script src="prototype.js"></script>
+</head>
+<body >
+	<h1>Prototype inhertance in Controllers</h1>
+	<div ng-controller="ctrlParent1">
+		<div ng-controller="ctrlChild1">
+
+		</div>
+	</div>
+
+	<div ng-controller="ctrlParent2 as parent">
+		parent value: {{parent.value}}
+		<div ng-controller="ctrlChild2 as child">
+			child value: {{child.value}}
+		</div> 
+	</div>
+</body>
+</html>

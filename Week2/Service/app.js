@@ -1,0 +1,62 @@
+///<reference path="angular.min.js" />
+(function () {
+    'use strict;'
+    angular.module('ShoppingListApp', [])
+    .controller('ShoppingListAddController', ShoppingListAddController)
+    .controller('ShoppingListShowController', ShoppingListShowController)
+    .service('ShoppingListService', ShoppingListService);
+
+
+    ShoppingListAddController.$inject = ['ShoppingListService'];
+
+    function ShoppingListAddController(ShoppingListService) {
+        var itemAdder = this;
+        itemAdder.itemName = "";
+        itemAdder.itemQuantity = "";
+     
+        itemAdder.addItems = function () {
+            ShoppingListService.addItem(itemAdder.itemName, itemAdder.itemQuantity);
+        }
+            
+    }
+
+    ShoppingListShowController.$inject = ['ShoppingListService'];
+    function ShoppingListShowController(ShoppingListService) {
+        var ShowList = this;
+        ShowList.name = "";
+        ShowList.items = ShoppingListService.getItems();
+        ShowList.removeItem = function (itemIndex) {
+            ShoppingListService.removeItem(itemIndex);
+        };
+    }
+
+
+   
+    function ShoppingListService() {
+        var service = this;
+        
+        var items = [];
+
+        service.addItem = function (itemName, quantity) {
+            var item = {
+                name: itemName,
+                quantity: quantity
+            }
+            items.push(item);
+        }
+
+        service.getItems = function () {
+            return items;
+        }
+
+        service.removeItem = function (itemIndex) {
+            items.splice(itemIndex,1);
+        }
+    }
+
+
+
+       
+
+}
+)();
