@@ -5,26 +5,17 @@ angular.module('ShoppingListDirectiveApp', [])
 .controller('ShoppingListController1', ShoppingListController1)
 .controller('ShoppingListController2', ShoppingListController2)
 .factory('ShoppingListFactory', ShoppingListFactory)
-.directive("listItemDescription", ListItemDescription)
-.directive("listItem", ListItem);
+.directive("shoppingList", ShoppingList)
 
-function ListItemDescription() {
+function ShoppingList() {
     var ddo = {
-        template: '{{item.quantity}} of {{item.name}}'
-    };
-
+        templateUrl: 'shoppingList.html',
+        scope: {
+            list:'=myList'
+        }
+    }
     return ddo;
 }
-
-function ListItem() {
-    var ddo = {
-    restrict:"E",
-    templateUrl: 'listItem.html'
-  };
-
-  return ddo;
-}
-
 
 
 // LIST #1 - controller
