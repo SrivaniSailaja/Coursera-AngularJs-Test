@@ -1,0 +1,13 @@
+﻿<table>
+	<tr>
+		<th>Name</th>
+		<th>short_name</th>
+		<th>Description</th>
+	</tr>
+	<tr ng-repeat="item in Ctrl.foundList">
+		<td>item.name</td> 
+		<td>item.short_name</td>
+		<td>item.description</td>
+		<td><button ng-class="removeItem($index)">Don't want this one!</button></td>
+	</tr>
+</table>

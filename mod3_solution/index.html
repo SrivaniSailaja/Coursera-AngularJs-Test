@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html ng-app="NarrowItDownApp">
+<head>
+	<title>Search Menu</title>
+	<link rel="stylesheet" href="Styles/bootstrap.min.css">
+	<script src="angular.min.js"></script>
+	<script src="app.js"></script>
+</head>
+<body ng-controller="NarrowItDownController as Ctrl">
+	<div class="container">
+		<center><h1>Search Menu Items</h1></center>
+		<input type="text" ng-model="Ctrl.name" />
+		<button ng-click="Ctrl.narrowdown(Ctrl.name)">Narrow It Down For Me!</button><br />
+		<found-items></found-items>
+	</div>
+</body>
+</html>
