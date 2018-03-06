@@ -22,6 +22,7 @@
         Ctrl.name = "";
 
         Ctrl.narrowdown = function (name) {
+            var promise = MenuSearchService.getMenuItems();
             Ctrl.foundList = MenuSearchService.getMatchedMenuItems(name);
 
         }
@@ -32,32 +33,13 @@
 
     }
 
-    MenuSearchService.$inject = ['$http', 'ApiBasePath']
-    function MenuSearchService($http, ApiBasePath) {
+    MenuSearchService.$inject = ['$http'];
+    function MenuSearchService($http) {
         var service = this;
         var found = [];
         var items = [];
         service.getMatchedMenuItems = function (name) {
-            var menuItems = service.getMenuItems();
-            for (var i = 0; i < menuItems.length; i++) {
-                if (menuItems[i].description.contains(name)) {
-                    found.push({
-                        name: menuItems[i].name,
-                        short_name: menuItems[i].short_name,
-                        description: menuItems[i].description
-                    });
-
-                    return found;
-                }
-            }
-        }
-
-        service.getMenuItems = function () {
-            var promise = $http({
-                method: "GET",
-                url: ApiBasePath
-            });
-
+            var promise = service.getMenuItems();
             promise.then(function (response) {
                 var data = response.data;
                 for (var i = 0; i < data.length; i++) {
@@ -67,15 +49,31 @@
                         description: data[i].description
                     });
                 }
-            })
-            .catch(function (error) {
-                console.log("Something went wrong");
             });
-            return items;
-        }
+            for (var i = 0; i < items.length; i++) {
+                if (items[i].description.contains(name)) {
+                    found.push({
+                        name: items[i].name,
+                        short_name: items[i].short_name,
+                        description: items[i].description
+                    });
+
+                    return found;
+                }
+            }
+        };
+
+        service.getMenuItems = function () {
+            var response = $http({
+                method: "GET",
+                url: "https://davids-restaurant.herokuapp.com/menu_items.json"
+            });
+            return response;
+
+        };
 
         service.removeMenuItem = function (index) {
             found.splice(itemIndex, 1);
-        }
+        };
     }
 })();
