@@ -1,13 +1,15 @@
-﻿<table>
-	<tr>
+﻿<div ng-if="list.numberOfItems()">Nothing found</div>
+<table ng-if="list.isDefined()">
+	<tr style="text-align:center">
 		<th>Name</th>
 		<th>short_name</th>
 		<th>Description</th>
 	</tr>
-	<tr ng-repeat="item in Ctrl.foundList">
-		<td>item.name</td> 
-		<td>item.short_name</td>
-		<td>item.description</td>
-		<td><button ng-class="removeItem($index)">Don't want this one!</button></td>
+	<tr ng-repeat="item in list.items">
+		<td>{{item.name}}</td>
+		<td>{{item.short_name}}</td>
+		<td>{{item.description}}</td>
+		<td><button ng-click="list.onRemove($index)">Don't want this one!</button></td>
 	</tr>
 </table>
+

@@ -11,19 +11,43 @@
         var ddo = {
             restrict: "E",
             templateUrl: 'menuList.html',
+            scope: {
+                items: "<myList",
+                numItems:"@numItems",
+                onRemove:'='
+            },
+            controller: NarrowItDownDirectiveController,
+            controllerAs: 'list',
+            bindToController:true
         };
 
         return ddo;
+    }
+
+    function NarrowItDownDirectiveController() {
+        var list1 = this;
+        list1.numberOfItems = function () {
+
+            if (list1.items.length === 0){
+                return true;
+            }
+        }
+
+        list1.isDefined = function () {
+            if (lis1 === undefined) {
+                return true;
+            }
+        }
     }
 
     NarrowItDownController.$inject = ['MenuSearchService']
     function NarrowItDownController(MenuSearchService) {
         var Ctrl = this;
         Ctrl.name = "";
-
         Ctrl.narrowdown = function (name) {
-            var promise = MenuSearchService.getMenuItems();
-            Ctrl.foundList = MenuSearchService.getMatchedMenuItems(name);
+            Ctrl.foundList = [];
+            Ctrl.foundList = MenuSearchService.getMatchedMenuItems(Ctrl.name);
+            Ctrl.numItems = Ctrl.foundList.length;
 
         }
 
@@ -36,44 +60,35 @@
     MenuSearchService.$inject = ['$http'];
     function MenuSearchService($http) {
         var service = this;
-        var found = [];
         var items = [];
         service.getMatchedMenuItems = function (name) {
-            var promise = service.getMenuItems();
-            promise.then(function (response) {
-                var data = response.data;
-                for (var i = 0; i < data.length; i++) {
-                    items.push({
-                        name: data[i].name,
-                        short_name: data[i].short_name,
-                        description: data[i].description
-                    });
-                }
-            });
-            for (var i = 0; i < items.length; i++) {
-                if (items[i].description.contains(name)) {
-                    found.push({
-                        name: items[i].name,
-                        short_name: items[i].short_name,
-                        description: items[i].description
-                    });
+            service.found = [];
 
-                    return found;
+            //if (name != "") 
+            {
+                $http.get("https://davids-restaurant.herokuapp.com/menu_items.json")
+          .then(function (response) {
+              items = response.data.menu_items;
+          });
+
+                for (var i = 0; i < items.length; i++) {
+                    if (items[i].description.includes(name)) {
+                        service.found.push({
+                            name: items[i].name,
+                            short_name: items[i].short_name,
+                            description: items[i].description
+                        });
+                    }
                 }
-            }
+          }
+            return service.found;
+           
         };
 
-        service.getMenuItems = function () {
-            var response = $http({
-                method: "GET",
-                url: "https://davids-restaurant.herokuapp.com/menu_items.json"
-            });
-            return response;
 
-        };
 
         service.removeMenuItem = function (index) {
-            found.splice(itemIndex, 1);
+            service.found.splice(index, 1);
         };
     }
 })();
