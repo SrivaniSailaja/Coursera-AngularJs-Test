@@ -1,0 +1,9 @@
+<a ui-sref="/">Back to Home Page</a>
+<ul>
+    <li ng-repeat="item in $ctrl.categories" 
+    ui-sref="$ctrl.categories.itemDetail({itemId:$index})">
+      {{ item.short_name }}  {{ item.name }} {{item.special_instructions}}
+    </li>
+</ul>
+
+<!--id":81,"short_name":"L","name":"Lunch","special_instructions"-->

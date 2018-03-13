@@ -4,7 +4,7 @@
 angular.module('ShoppingListComponentApp', [])
 .controller('ShoppingListController', ShoppingListController)
 .factory('ShoppingListFactory', ShoppingListFactory)
-.component('ShoppingList', {
+.component('shoppingList', {
     templateUrl: 'shoppingList.html',
     controller: ShoppingListComponentController,
     bindings: {
@@ -14,7 +14,8 @@ angular.module('ShoppingListComponentApp', [])
     }
 });
 
-function ShoppingListComponentController() {
+ShoppingListComponentController.$inject = ['$scope', '$element']
+function ShoppingListComponentController($scope, $element) {
     var $ctrl = this;
 
     $ctrl.cookiesInList = function () {
@@ -29,6 +30,31 @@ function ShoppingListComponentController() {
 
     $ctrl.remove = function (myIndex) {
         $ctrl.onRemove({ index: myIndex });
+    }
+
+    $ctrl.$onInit = function () {
+        console.log("On Init");
+    }
+
+    $ctrl.$onChanges = function (changeObj) {
+        console.log(changeObj);
+    }
+
+    $ctrl.$postLink = function () {
+        $scope.$watch('$ctrl.cookiesInList()',function(newValue,oldValue){
+            console.log($element);
+            if (newValue === true) {
+                var warningElem = $element.find('div.error');
+                warningElem.slideDown(900);
+            } else {
+                var warningElem = $element.find('div.error');
+                warningElem.slideUp(900);
+            }
+    })
+    }
+
+    $ctrl.$doCheck = function () {
+        console.log("hello world");
     }
 
 }
